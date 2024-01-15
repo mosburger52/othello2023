@@ -234,4 +234,5 @@ class MosAI(OthelloAI):
         # ランダムに選ぶ
         selected_move = random.choice(valid_moves)
         return selected_move
-####ああ
+####ああいい
+
