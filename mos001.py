@@ -217,23 +217,32 @@ class RandomAI(OthelloAI):
         selected_move = random.choice(valid_moves)
         return selected_move
 
-### 自分の作ったAIをここに貼る
-
-import random
+### 自分の作ったMosAI
 
 class MosAI(OthelloAI):
     def __init__(self, face, name):
         self.face = face
         self.name = name
 
-    def move(self, board, color: int)->tuple[int, int]:
+    def move(self, board, color: int) -> tuple[int, int]:
         """
         ボードが与えられたとき、どこに置くか(row,col)を返す
         """
         valid_moves = get_valid_moves(board, color)
-        # ランダムに選ぶ
-        selected_move = random.choice(valid_moves)
+
+        # すべての角の座標
+        corners = [(0, 0), (0, len(board)-1), (len(board)-1, 0), (len(board)-1, len(board)-1)]
+
+        # 角があれば、角に優先的に置く
+        corner_moves = list(set(valid_moves) & set(corners))
+        if corner_moves:
+            selected_move = random.choice(corner_moves)
+        else:
+            # 角がない場合はランダムに選ぶ
+            selected_move = random.choice(valid_moves)
+
         return selected_move
-####ああいいああ
+
+####
 
 
