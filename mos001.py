@@ -218,7 +218,6 @@ class RandomAI(OthelloAI):
         return selected_move
 
 ### 自分の作ったMosAI
-
 class MosAI(OthelloAI):
     def __init__(self, face, name):
         self.face = face
@@ -238,10 +237,17 @@ class MosAI(OthelloAI):
         if corner_moves:
             selected_move = random.choice(corner_moves)
         else:
-            # 角がない場合はランダムに選ぶ
-            selected_move = random.choice(valid_moves)
+            # 角がない場合は、取れる角がある場合は必ず角を取るように選択
+            corner_moves = list(set(valid_moves) & set(corners))
+            if corner_moves:
+                selected_move = random.choice(corner_moves)
+            else:
+                # それでも取れる角がない場合はランダムに選ぶ
+                selected_move = random.choice(valid_moves)
 
         return selected_move
+
+   
 
 ####
 
